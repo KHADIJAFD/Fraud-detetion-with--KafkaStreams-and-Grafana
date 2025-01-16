@@ -1,11 +1,11 @@
-<h1>Fraud Detection with Kafka Streams </h1>
+#Fraud Detection with Kafka Streams 
 This project aims to develop a dashboard using Grafana for visualizing data stored in an InfluxDB bucket named fraud-detection. The focus is on providing clear and interactive visualizations of transaction data, including amounts and user activities, to facilitate real-time monitoring and analysis without applying data aggregation.
-<h3>Key Features</h3>
+###Key Features
 1. Real-time Transaction Processing
 2. Storage of Suspicious Transactions
 3. Data Visualization
 4. Simplified Deployment
-<h3>Architecture</h3>
+###Architecture
 The overall project architecture is illustrated below:
 
 Kafka Streams reads raw transactions from the transactions-input topic.
@@ -14,7 +14,7 @@ Suspicious transactions are published to the fraud-alerts topic.
 These transactions are logged in InfluxDB.
 Grafana fetches data from InfluxDB for visualization.
 
-<h3>Setup of Kafka cluster</h3>
+###Setup of Kafka cluster
 version: '3.8'
 networks:
 monitoring:
