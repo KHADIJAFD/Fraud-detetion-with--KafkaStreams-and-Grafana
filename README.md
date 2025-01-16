@@ -24,7 +24,48 @@ This setup ensures a single-node Kafka cluster suitable for development and test
 ## Implementation
 1. Transaction Class
 This class represents a financial transaction through three attributes: userId (user identifier), amount (transaction amount), and timestamp (transaction timestamp). It is designed for use in applications that require processing or exchanging transaction-related data, particularly via JSON.
-[Transaction.java](src%2Fmain%2Fjava%2Forg%2Fexample%2FTransaction.java)
+``` java
+package org.example;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Transaction {
+    private String userId;
+    private double amount;
+    private int timestamp;
+
+    public Transaction() {}
+
+    public Transaction(String userId, double amount, int timestamp) {
+        this.userId = userId;
+        this.amount = amount;
+        this.timestamp = timestamp;
+    }
+
+    @JsonProperty("userId")
+    public String getUserId() {
+        return userId;
+    }
+
+    @JsonProperty("amount")
+    public double getAmount() {
+        return amount;
+    }
+
+    @JsonProperty("timestamp")
+    public int getTimestamp() {
+        return timestamp;
+    }
+
+    public String toString() {
+        return "Transaction{" +
+                "userId='" + userId + '\'' +
+                ", amount=" + amount +
+                ", timestamp=" + timestamp +
+                '}';
+    }
+}
+```
 2.  TransactionProducer Class
 The `TransactionProducer` class is a Kafka producer that generates random transactions and sends them to the Kafka topic `transactions-input`. It configures the producer with essential properties, such as the Kafka server address (`localhost:9092`) and string serializers for keys and values. In each iteration, it generates a transaction using the `generateTransaction()` method, which creates a unique `userId`, a random `amount`, and a current `timestamp`. The transaction is serialized to JSON using Jackson's `ObjectMapper` and sent to Kafka as a message. The producer operates continuously, sending messages every second and handling errors during transmission.
 [TransactionProducer.java](src%2Fmain%2Fjava%2Forg%2Fexample%2FTransactionProducer.java)
